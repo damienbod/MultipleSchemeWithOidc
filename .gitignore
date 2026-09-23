@@ -427,3 +427,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+/SwiyuTools/SwiyuDidToolbox/.didtoolbox/**.*
+/SwiyuTools/SwiyuDidToolbox/.didtoolbox/**
+/SwiyuTools/SwiyuDidToolbox/
