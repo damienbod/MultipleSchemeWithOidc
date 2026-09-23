@@ -1,4 +1,4 @@
-namespace BffOpenIddict.Server.Services;
+namespace BffOpenId.Server.Services;
 
 public static class EndpointRouteBuilderExtensions
 {

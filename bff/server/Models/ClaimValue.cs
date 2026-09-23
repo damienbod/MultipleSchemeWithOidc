@@ -1,4 +1,4 @@
-﻿namespace BffOpenIddict.Server.Models;
+﻿namespace BffOpenId.Server.Models;
 
 public class ClaimValue
 {

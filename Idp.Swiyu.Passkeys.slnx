@@ -1,19 +1,16 @@
 <Solution>
   <Folder Name="/Solution Items/">
-    <File Path="CHANGELOG.md" />
     <File Path="README.md" />
-    <File Path="README_VOT_RFC_8485.md" />
   </Folder>
   <Folder Name="/Tools/">
     <Project Path="ConvertCertificatesBase64/ConvertCertificatesBase64.csproj" />
     <Project Path="GenerateCertificate/GenerateCertificate.csproj" />
   </Folder>
-  <Project Path="Idp.Swiyu.Passkeys.ApiService/Idp.Swiyu.Passkeys.ApiService.csproj" />
+  <Project Path="bff/server/BffOpenId.Server.csproj" />
   <Project Path="Idp.Swiyu.Passkeys.AppHost/Idp.Swiyu.Passkeys.AppHost.csproj" />
   <Project Path="Idp.Swiyu.Passkeys.ServiceDefaults/Idp.Swiyu.Passkeys.ServiceDefaults.csproj" />
   <Project Path="Idp.Swiyu.Passkeys.Sts.Domain.Migrations/Idp.Swiyu.Passkeys.Sts.Domain.Migrations.csproj" Id="2c9e5e79-d6d5-4d8b-a258-6d8e50f70f20" />
   <Project Path="Idp.Swiyu.Passkeys.Sts.Domain/Idp.Swiyu.Passkeys.Sts.Domain.csproj" Id="f5a63b68-ee60-44cf-bc67-3cfdc958744e" />
   <Project Path="Idp.Swiyu.Passkeys.Sts/Idp.Swiyu.Passkeys.Sts.csproj" />
-  <Project Path="Idp.Swiyu.Passkeys.Web/Idp.Swiyu.Passkeys.Web.csproj" />
   <Project Path="Swiyu.Endpoints.Proxy/Swiyu.Endpoints.Proxy.csproj" />
 </Solution>

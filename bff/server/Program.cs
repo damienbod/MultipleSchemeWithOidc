@@ -1,5 +1,5 @@
-﻿using BffOpenIddict.Server;
-using BffOpenIddict.Server.Services;
+﻿using BffOpenId.Server;
+using BffOpenId.Server.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
