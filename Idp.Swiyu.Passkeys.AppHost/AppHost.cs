@@ -5,7 +5,6 @@ using System.Text;
 const string HTTP = "http";
 const string IDENTITY_PROVIDER = "identity-provider";
 const string WEB_CLIENT = "web-client";
-const string API_SERVICE = "api-service";
 
 var builder = DistributedApplication.CreateBuilder(args);
 
@@ -190,16 +189,8 @@ identityProvider = builder.AddProject<Projects.Idp_Swiyu_Passkeys_Sts>(IDENTITY_
     .WaitFor(swiyuProxy)
     .WithHttpHealthCheck("/health");
 
-var apiService = builder.AddProject<Idp_Swiyu_Passkeys_ApiService>(API_SERVICE)
-    .WithReference(identityProvider)
-    .WaitFor(identityProvider)
-    .WithHttpHealthCheck("/health")
-    .WithEnvironment("WebOidcAuthority", webOidcAuthority);
-
-builder.AddProject<Projects.Idp_Swiyu_Passkeys_Web>(WEB_CLIENT)
+builder.AddProject<Projects.BffOpenId_Server>(WEB_CLIENT)
     .WithExternalHttpEndpoints()
-    .WithReference(apiService)
-    .WaitFor(apiService)
     .WithEnvironment("WebOidcAuthority", webOidcAuthority)
     .WithEnvironment("WebOidcClientId", webOidcClientId)
     .WithEnvironment("WebOidcClientPrivatePemBase64", webOidcClientPrivatePemBase64)
