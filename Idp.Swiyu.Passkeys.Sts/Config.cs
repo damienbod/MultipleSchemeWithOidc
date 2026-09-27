@@ -64,7 +64,7 @@ public static class Config
                 PostLogoutRedirectUris = { $"{webClientUrl}/signout-callback-oidc" },
 
                 BackChannelLogoutSessionRequired = true,
-                BackChannelLogoutUri = $"{webClientUrl}/logout",
+                BackChannelLogoutUri = $"{webClientUrl}/api/logout",
 
                 AllowOfflineAccess = true,
                 AllowedScopes = { "openid", "profile", "scope2" }

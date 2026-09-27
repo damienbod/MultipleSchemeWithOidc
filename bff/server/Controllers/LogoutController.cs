@@ -12,7 +12,9 @@ namespace BffOpenId.Server.Controllers;
 
 // See Duende IdentityServer original src:
 // https://github.com/DuendeSoftware/Samples/tree/main/IdentityServer/v7/SessionManagement/Client
-public class LogoutController : Controller
+[Route("api/[controller]")]
+[ApiController]
+public class LogoutController : ControllerBase
 {
     private readonly HttpClient _httpClient;
     private readonly ILogger<LogoutController> _logger;
