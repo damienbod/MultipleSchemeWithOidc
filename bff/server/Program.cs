@@ -80,7 +80,6 @@ builder.Services.AddAuthentication(options =>
 
     options.ClientId = builder.Configuration["WebOidcClientId"];
     options.Authority = builder.Configuration["WebOidcAuthority"];
-    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
     options.ResponseType = OpenIdConnectResponseType.Code;
 
     // client_assertion used, set in oidc events
