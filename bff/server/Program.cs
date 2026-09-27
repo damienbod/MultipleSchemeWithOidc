@@ -56,6 +56,7 @@ var ecdsaCertificateKey = new ECDsaSecurityKey(ecdsaCertificate.GetECDsaPrivateK
 
 builder.Services.AddTransient<CookieEventHandler>();
 builder.Services.AddSingleton<LogoutSessionManager>();
+services.AddDistributedMemoryCache(); // for dev only
 
 builder.Services.AddAuthentication(options =>
 {
@@ -80,15 +81,15 @@ builder.Services.AddAuthentication(options =>
 {
     options.Cookie.Name = "__Host-Http-one";
     options.Cookie.SameSite = SameSiteMode.Lax;
+    options.EventsType = typeof(CookieEventHandler);
 })
 .AddCookie("SchemeTwo", options =>
 {
     options.Cookie.Name = "__Host-Http-two";
     options.Cookie.SameSite = SameSiteMode.Lax;
+    options.EventsType = typeof(CookieEventHandler);
 })
-.AddCookie("SchemeOidcAuth", options =>
-{
-})
+.AddCookie("SchemeOidcAuth")
 .AddOpenIdConnect(options =>
 {
     options.SignInScheme = "SchemeOidcAuth";
