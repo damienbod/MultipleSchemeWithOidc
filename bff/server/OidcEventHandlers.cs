@@ -1,4 +1,5 @@
 using Duende.IdentityModel;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 namespace BffOpenId.Server;
@@ -16,7 +17,33 @@ public static class OidcEventHandlers
 
             // standard OIDC flow handlers using JAR and client assertions - not using OAuth PAR
             //OnRedirectToIdentityProvider = async context => await OnRedirectToIdentityProviderHandler(context, configuration),
+
+            OnTokenValidated = async context => await OnTokenValidatedHandler(context, configuration),
         };
+    }
+
+    private static async Task OnTokenValidatedHandler(TokenValidatedContext context, IConfiguration configuration)
+    {
+        // TODO add sign in scheme logic
+        var applicationServices = context.HttpContext.RequestServices;
+        if (context.Principal != null)
+        {
+            if (true) //context.Principal ...check some claim switch
+            {
+                await context.HttpContext.SignInAsync("SchemeOne", context.Principal, context.Properties);
+                await context.HttpContext.SignOutAsync("SchemeOidcAuth");
+            }
+            else
+            {
+                await context.HttpContext.SignInAsync("SchemeTwo", context.Principal, context.Properties);
+                await context.HttpContext.SignOutAsync("SchemeOidcAuth");
+            }
+
+            //using var scope = applicationServices.CreateScope();
+            //context.Principal = await scope.ServiceProvider
+            //    .GetRequiredService<CustomClaimsTransformator>()
+            //    .TransformAsync(context.Principal);
+        }
     }
 
     private static async Task OnAuthorizationCodeReceivedHandler(AuthorizationCodeReceivedContext context, IConfiguration configuration)
