@@ -4,7 +4,6 @@ using BffOpenId.Server.Services;
 using Duende.IdentityModel;
 using Idp.Swiyu.Passkeys.ServiceDefaults;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
