@@ -120,6 +120,14 @@ internal static class HostingExtensions
                 {
                     options.Diagnostics.ChunkSize = 1024 * 1024 * 10; // 10 MB
                 }
+
+                // see https://docs.duendesoftware.com/identityserver/fundamentals/resources/
+                options.EmitStaticAudienceClaim = true;
+
+                options.ServerSideSessions.UserDisplayNameClaimType = "name"; // this sets the "name" claim as the display name in the admin tool
+                options.ServerSideSessions.RemoveExpiredSessions = true; // removes expired sessions. defaults to true.
+                options.ServerSideSessions.ExpiredSessionsTriggerBackchannelLogout = true; // this triggers notification to clients. defaults to false
+
             })
             .AddSigningCredential(ecdsaCertificateKey, "ES256") // ecdsaCertificate
             .AddInMemoryIdentityResources(Config.IdentityResources)
