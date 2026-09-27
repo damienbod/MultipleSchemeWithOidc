@@ -22,7 +22,7 @@ builder.WebHost.ConfigureKestrel(serverOptions =>
 var services = builder.Services;
 var configuration = builder.Configuration;
 
-var stsServer = configuration["OpenIDConnectSettings:Authority"];
+var stsServer = configuration["WebOidcAuthority"];
 
 services.AddSecurityHeaderPolicies()
     .SetPolicySelector(ctx =>
