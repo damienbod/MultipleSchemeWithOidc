@@ -136,7 +136,9 @@ internal static class HostingExtensions
             .AddInMemoryApiResources(Config.GetApiResources())
             .AddAspNetIdentity<ApplicationUser>()
             .AddLicenseSummary()
-            .AddProfileService<ProfileService>();
+            .AddProfileService<ProfileService>()
+            // enables server-side sessions
+            .AddServerSideSessions();
 
         idsvrBuilder.AddJwtBearerClientAuthentication();
 
