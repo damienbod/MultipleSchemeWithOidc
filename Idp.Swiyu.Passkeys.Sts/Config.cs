@@ -60,7 +60,7 @@ public static class Config
                 AlwaysIncludeUserClaimsInIdToken = true,
 
                 RedirectUris = { $"{webClientUrl}/signin-oidc" },
-                //FrontChannelLogoutUri = $"{webClientUrl}/signout-oidc",
+                FrontChannelLogoutUri = $"{webClientUrl}/signout-oidc",
                 PostLogoutRedirectUris = { $"{webClientUrl}/signout-callback-oidc" },
 
                 BackChannelLogoutSessionRequired = true,
