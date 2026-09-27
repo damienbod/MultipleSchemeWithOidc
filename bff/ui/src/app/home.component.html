@@ -56,14 +56,23 @@
         @if (userProfileClaims$ | async; as userProfileClaims) { 
 			@if (userProfileClaims?.isAuthenticated) {
 				<button type="button" class="btn btn-primary" (click)="getDirectApiSchemeOne()">
-				  Get direct data using API
+				  Get scheme 1 data using API 
 				</button>
-			
-				<hr/>
-				<pre>{{ dataFromSchemeTwo$ | async | json }}</pre>
-
+			}
+		}
+      </div>
+    </div>
+  </div>
+  
+   <div class="col-sm-4 mb-3 mb-sm-0">
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="card-title">Direct data using API Scheme Two</h5>
+        <pre>{{ dataFromSchemeTwo$ | async | json }}</pre>
+        @if (userProfileClaims$ | async; as userProfileClaims) { 
+			@if (userProfileClaims?.isAuthenticated) {
 				<button type="button" class="btn btn-primary" (click)="getDirectApiSchemeTwo()">
-				  Get direct data using API
+				  Get scheme 2 data using API
 				</button>
 			}
 		}
