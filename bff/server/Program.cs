@@ -59,6 +59,19 @@ builder.Services.AddAuthentication(options =>
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
     options.DefaultSignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
 })
+.AddPolicyScheme("Unknown", "Select SchemeOne/SchemeTwo", options =>
+{
+    options.ForwardDefaultSelector = context =>
+    {
+        if (context.Request.Cookies.ContainsKey("__Host-Http-one"))
+            return "SchemeOne";
+
+        if (context.Request.Cookies.ContainsKey("__Host-Http-two"))
+            return "SchemeTwo";
+
+        return "SchemeOne"; // fallback
+    };
+})
 .AddCookie("SchemeOne", options =>
 {
     options.Cookie.Name = "__Host-Http-one";
