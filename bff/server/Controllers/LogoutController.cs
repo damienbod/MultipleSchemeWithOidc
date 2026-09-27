@@ -122,12 +122,12 @@ public class LogoutController : ControllerBase
         var parameters = new TokenValidationParameters
         {
             ValidIssuer = disco.Issuer,
-            ValidAudience = _configuration["WebOidcAuthority"],
+            ValidAudience = "webclient", //_configuration["WebOidcAuthority"],
             IssuerSigningKeys = keys,
 
             NameClaimType = JwtClaimTypes.Name,
             RoleClaimType = JwtClaimTypes.Role
-        };
+        }; 
 
         var handler = new JwtSecurityTokenHandler();
         handler.InboundClaimTypeMap.Clear();
