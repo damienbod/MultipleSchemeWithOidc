@@ -28,17 +28,11 @@ public static class OidcEventHandlers
         var applicationServices = context.HttpContext.RequestServices;
         if (context.Principal != null)
         {
-            // OidcEventHandlers.cs (OnTokenValidated)
             var loa = context.Principal?.FindFirst("loa")?.Value;
             var targetScheme = loa == "loa.400" ? "SchemeOne" : "SchemeTwo";
 
             await context.HttpContext.SignInAsync(targetScheme, context.Principal!, context.Properties);
             await context.HttpContext.SignOutAsync("SchemeOidcAuth");
-
-            //using var scope = applicationServices.CreateScope();
-            //context.Principal = await scope.ServiceProvider
-            //    .GetRequiredService<CustomClaimsTransformator>()
-            //    .TransformAsync(context.Principal);
         }
     }
 
