@@ -1,5 +1,10 @@
 # Multiple Schemes with OpenID Connect
 
+View serversidesessions on Duende:
+
+```
+https://localhost:5001/serversidesessions
+```
 
 ## Links
 
