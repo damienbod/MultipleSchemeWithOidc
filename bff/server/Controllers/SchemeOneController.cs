@@ -8,7 +8,7 @@ namespace BffOpenId.Server.Controllers;
 [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Route("api/[controller]")]
-public class DirectApiController : ControllerBase
+public class SchemOneController : ControllerBase
 {
     [HttpGet]
     public IEnumerable<string> Get()

@@ -55,19 +55,27 @@ var ecdsaCertificateKey = new ECDsaSecurityKey(ecdsaCertificate.GetECDsaPrivateK
 
 builder.Services.AddAuthentication(options =>
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultScheme = "Unknown";
     options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
     options.DefaultSignOutScheme = OpenIdConnectDefaults.AuthenticationScheme;
 })
-.AddCookie(options =>
+.AddCookie("SchemeOne", options =>
 {
-    options.Cookie.Name = "__Host-idp-swiyu-passkeys-web";
+    options.Cookie.Name = "__Host-Http-one";
     options.Cookie.SameSite = SameSiteMode.Lax;
-    // can be strict if same-site
-    //options.Cookie.SameSite = SameSiteMode.Strict;
+})
+.AddCookie("SchemeTwo", options =>
+{
+    options.Cookie.Name = "__Host-Http-two";
+    options.Cookie.SameSite = SameSiteMode.Lax;
+})
+.AddCookie("SchemeOidcAuth", options =>
+{
 })
 .AddOpenIdConnect(options =>
 {
+    options.SignInScheme = "SchemeOidcAuth";
+
     options.Events = OidcEventHandlers.OidcEvents(builder.Configuration);
 
     options.ClientId = builder.Configuration["WebOidcClientId"];
