@@ -63,8 +63,14 @@ public static class Config
                 FrontChannelLogoutUri = $"{webClientUrl}/signout-oidc",
                 PostLogoutRedirectUris = { $"{webClientUrl}/signout-callback-oidc" },
 
+                BackChannelLogoutSessionRequired = true,
+                BackChannelLogoutUri = $"{webClientUrl}/api/logout",
+
                 AllowOfflineAccess = true,
-                AllowedScopes = { "openid", "profile", "scope2" }
+                AllowedScopes = { "openid", "profile", "scope2" },
+
+                 // this causes refresh tokens to slide the user's session lifetime at IdentityServer
+                CoordinateLifetimeWithUserSession = true,
             }
         ];
     }

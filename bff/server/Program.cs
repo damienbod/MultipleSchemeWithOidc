@@ -1,9 +1,9 @@
 ﻿using BffOpenId.Server;
+using BffOpenId.Server.BackChannelLogout;
 using BffOpenId.Server.Services;
 using Duende.IdentityModel;
 using Idp.Swiyu.Passkeys.ServiceDefaults;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.JsonWebTokens;
@@ -53,6 +53,11 @@ var webDpopClientPublicPem = ConfigConverter.GetPemFromBase64Config("WebDpopClie
 var ecdsaCertificate = X509Certificate2.CreateFromPem(webDpopClientPublicPem, webDpopClientPrivatePem);
 var ecdsaCertificateKey = new ECDsaSecurityKey(ecdsaCertificate.GetECDsaPrivateKey());
 
+
+builder.Services.AddTransient<CookieEventHandler>();
+builder.Services.AddSingleton<LogoutSessionManager>();
+services.AddDistributedMemoryCache(); // for dev only
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Unknown";
@@ -76,15 +81,15 @@ builder.Services.AddAuthentication(options =>
 {
     options.Cookie.Name = "__Host-Http-one";
     options.Cookie.SameSite = SameSiteMode.Lax;
+    options.EventsType = typeof(CookieEventHandler);
 })
 .AddCookie("SchemeTwo", options =>
 {
     options.Cookie.Name = "__Host-Http-two";
     options.Cookie.SameSite = SameSiteMode.Lax;
+    options.EventsType = typeof(CookieEventHandler);
 })
-.AddCookie("SchemeOidcAuth", options =>
-{
-})
+.AddCookie("SchemeOidcAuth")
 .AddOpenIdConnect(options =>
 {
     options.SignInScheme = "SchemeOidcAuth";
