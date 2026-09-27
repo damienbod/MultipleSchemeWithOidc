@@ -36,7 +36,8 @@ public class LogoutController : ControllerBase
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<IActionResult> Index(string logout_token)
+    [IgnoreAntiforgeryToken]
+    public async Task<IActionResult> Index([FromForm] string logout_token)
     {
         _logger.LogInformation("BC Logout event from server: {logout_token}", logout_token);
 
