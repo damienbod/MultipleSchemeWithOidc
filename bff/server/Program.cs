@@ -1,4 +1,5 @@
 ﻿using BffOpenId.Server;
+using BffOpenId.Server.BackChannelLogout;
 using BffOpenId.Server.Services;
 using Duende.IdentityModel;
 using Idp.Swiyu.Passkeys.ServiceDefaults;
@@ -52,6 +53,10 @@ var webDpopClientPublicPem = ConfigConverter.GetPemFromBase64Config("WebDpopClie
 
 var ecdsaCertificate = X509Certificate2.CreateFromPem(webDpopClientPublicPem, webDpopClientPrivatePem);
 var ecdsaCertificateKey = new ECDsaSecurityKey(ecdsaCertificate.GetECDsaPrivateKey());
+
+
+builder.Services.AddTransient<CookieEventHandler>();
+builder.Services.AddSingleton<LogoutSessionManager>();
 
 builder.Services.AddAuthentication(options =>
 {
