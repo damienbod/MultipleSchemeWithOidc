@@ -38,7 +38,7 @@ public static class Config
         var stsOidcWebClientPublicPem = ConfigConverter.GetPemFromBase64Config("StsOidcWebClientPublicPemBase64", configuration);
         var rsaCertificate = X509Certificate2.CreateFromPem(stsOidcWebClientPublicPem);
 
-        // interactive client using code flow + pkce + par + DPoP
+        // interactive client using code flow + pkce + par // removed for tests DPoP
         return [
             new Client
             {
@@ -53,7 +53,7 @@ public static class Config
                             Value = Convert.ToBase64String(rsaCertificate.GetRawCertData())
                         }
                 },
-                RequireDPoP = true,
+                // RequireDPoP = true, // Removed for testing
                 RequirePushedAuthorization = true,
 
                 AllowedGrantTypes = GrantTypes.Code,
