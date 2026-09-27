@@ -11,7 +11,7 @@ using System.Text.Json;
 namespace BffOpenId.Server.Controllers;
 
 // See Duende IdentityServer original src:
-// https://github.com/DuendeSoftware/Samples/tree/main/IdentityServer/v7/SessionManagement/Client
+// https://github.com/DuendeSoftware/Samples/tree/main/IdentityServer/v8/SessionManagement/Client
 [Route("api/[controller]")]
 [ApiController]
 public class LogoutController : ControllerBase
