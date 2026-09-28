@@ -24,7 +24,6 @@ public static class OidcEventHandlers
 
     private static async Task OnTokenValidatedHandler(TokenValidatedContext context, IConfiguration configuration)
     {
-        // TODO add sign in scheme logic
         var applicationServices = context.HttpContext.RequestServices;
         if (context.Principal != null)
         {

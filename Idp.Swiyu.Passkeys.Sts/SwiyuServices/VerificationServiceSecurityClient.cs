@@ -33,7 +33,6 @@ public class VerificationServiceSecurityClient
     {
         var client = new HttpClient();
 
-        // TODO use address
         var disco = await client.GetDiscoveryDocumentAsync(configuration["OAuthIssuerUrl"]);
 
         if (disco.IsError) throw new Exception(disco.Error);
