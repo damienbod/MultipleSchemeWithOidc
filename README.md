@@ -1,5 +1,7 @@
 # Multiple Schemes with OpenID Connect
 
+[![.NET](https://github.com/damienbod/MultipleSchemeWithOidc/actions/workflows/dotnet.yml/badge.svg)](https://github.com/damienbod/MultipleSchemeWithOidc/actions/workflows/dotnet.yml)
+
 Blogs
 
 [Use multiple schemes in a ASP.NET Core Web application](https://damienbod.com)
