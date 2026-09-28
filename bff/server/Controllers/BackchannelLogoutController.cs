@@ -14,17 +14,17 @@ namespace BffOpenId.Server.Controllers;
 // https://github.com/DuendeSoftware/Samples/tree/main/IdentityServer/v8/SessionManagement/Client
 [Route("api/[controller]")]
 [ApiController]
-public class LogoutController : ControllerBase
+public class BackchannelLogoutController : ControllerBase
 {
     private readonly HttpClient _httpClient;
-    private readonly ILogger<LogoutController> _logger;
+    private readonly ILogger<BackchannelLogoutController> _logger;
     private readonly IConfiguration _configuration;
 
     public LogoutSessionManager LogoutSessionsManager { get; }
 
-    public LogoutController(
+    public BackchannelLogoutController(
         LogoutSessionManager logoutSessions,
-        ILogger<LogoutController> logger,
+        ILogger<BackchannelLogoutController> logger,
         IHttpClientFactory httpClientFactory,
         IConfiguration configuration)
     {
