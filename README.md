@@ -1,5 +1,9 @@
 # Multiple Schemes with OpenID Connect
 
+Blogs
+
+[Use multiple schemes in a ASP.NET Core Web application](https://damienbod.com)
+
 View serversidesessions on Duende:
 
 ```
