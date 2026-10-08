@@ -21,14 +21,16 @@ public partial class LogoutSessionManager
 
     public void Add(string? sub, string? sid)
     {
-        _logger.LogWarning("BC Add a logout to the session: sub: {sub}, sid: {sid}", sub, sid);
+        _logger.LogInformation("BC Add logout session to cache. sub: '{sub}', sid: '{sid}'", sub, sid);
 
         var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromDays(cacheExpirationInDays));
 
-        var key = sub + sid;
+        var key = GetCacheKey(sub, sid);
         var logoutSession = _cache.GetString(key);
+
         _logger.LogInformation("BC logoutSession: {logoutSession}", logoutSession);
+
         if (logoutSession != null)
         {
             var session = JsonSerializer.Deserialize<BackchannelLogoutSession>(logoutSession);
@@ -43,7 +45,8 @@ public partial class LogoutSessionManager
     public async Task<bool> IsLoggedOutAsync(string? sub, string? sid)
     {
         _logger.LogInformation("BC IsLoggedOutAsync: sub: {sub}, sid: {sid}", sub, sid);
-        var key = sub + sid;
+        var key = GetCacheKey(sub, sid);
+
         var matches = false;
         var logoutSession = await _cache.GetStringAsync(key);
         if (logoutSession != null)
@@ -58,5 +61,17 @@ public partial class LogoutSessionManager
         }
 
         return matches;
+    }
+
+    public async Task RemoveAsync(string? sub, string? sid)
+    {
+        _logger.LogInformation("BC Remove logout session from cache. sub: '{sub}', sid: '{sid}'", sub, sid);
+        var key = GetCacheKey(sub, sid);
+        await _cache.RemoveAsync(key);
+    }
+
+    private static string GetCacheKey(string? sub, string? sid)
+    {
+        return sub + sid;
     }
 }
