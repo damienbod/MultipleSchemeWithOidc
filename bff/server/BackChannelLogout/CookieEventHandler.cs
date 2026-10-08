@@ -8,9 +8,9 @@ public class CookieEventHandler : CookieAuthenticationEvents
     private readonly LogoutSessionManager _logoutSessionManager;
     private readonly ILogger<CookieEventHandler> _logger;
 
-    public CookieEventHandler(LogoutSessionManager logoutSessions, ILogger<CookieEventHandler> logger)
+    public CookieEventHandler(LogoutSessionManager logoutSessionManager, ILogger<CookieEventHandler> logger)
     {
-        _logoutSessionManager = logoutSessions;
+        _logoutSessionManager = logoutSessionManager;
         _logger = logger;
     }
 
