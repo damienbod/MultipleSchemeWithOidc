@@ -16,6 +16,8 @@ public class CookieEventHandler : CookieAuthenticationEvents
 
     public override async Task ValidatePrincipal(CookieValidatePrincipalContext context)
     {
+        ArgumentNullException.ThrowIfNull(context);
+
         if (context.Principal!.Identity!.IsAuthenticated)
         {
             _logger.LogInformation("BC ValidatePrincipal: {PrincipalIdentityIsAuthenticated}", context.Principal.Identity.IsAuthenticated);
