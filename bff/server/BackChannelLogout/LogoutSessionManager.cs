@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace BffOpenId.Server.BackChannelLogout;
 
-public partial class LogoutSessionManager
+public class LogoutSessionManager
 {
     private readonly ILogger<LogoutSessionManager> _logger;
     private readonly IDistributedCache _cache;
