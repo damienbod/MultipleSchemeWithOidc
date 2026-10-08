@@ -20,7 +20,7 @@ public class BackchannelLogoutController : ControllerBase
     private readonly ILogger<BackchannelLogoutController> _logger;
     private readonly IConfiguration _configuration;
 
-    public LogoutSessionManager LogoutSessionsManager { get; }
+    private readonly LogoutSessionManager _logoutSessionsManager;
 
     public BackchannelLogoutController(
         LogoutSessionManager logoutSessions,
@@ -28,7 +28,7 @@ public class BackchannelLogoutController : ControllerBase
         IHttpClientFactory httpClientFactory,
         IConfiguration configuration)
     {
-        LogoutSessionsManager = logoutSessions;
+        _logoutSessionsManager = logoutSessions;
         _httpClient = httpClientFactory.CreateClient();
         _logger = logger;
         _configuration = configuration;
@@ -53,7 +53,7 @@ public class BackchannelLogoutController : ControllerBase
             var sub = user.FindFirst("sub")?.Value;
             var sid = user.FindFirst("sid")?.Value;
 
-            LogoutSessionsManager.Add(sub, sid);
+            _logoutSessionsManager.Add(sub, sid);
 
             return Ok();
         }
