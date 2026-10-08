@@ -19,16 +19,15 @@ public class BackchannelLogoutController : ControllerBase
     private readonly HttpClient _httpClient;
     private readonly ILogger<BackchannelLogoutController> _logger;
     private readonly IConfiguration _configuration;
-
     private readonly LogoutSessionManager _logoutSessionsManager;
 
     public BackchannelLogoutController(
-        LogoutSessionManager logoutSessions,
+        LogoutSessionManager logoutSessionsManager,
         ILogger<BackchannelLogoutController> logger,
         IHttpClientFactory httpClientFactory,
         IConfiguration configuration)
     {
-        _logoutSessionsManager = logoutSessions;
+        _logoutSessionsManager = logoutSessionsManager;
         _httpClient = httpClientFactory.CreateClient();
         _logger = logger;
         _configuration = configuration;
