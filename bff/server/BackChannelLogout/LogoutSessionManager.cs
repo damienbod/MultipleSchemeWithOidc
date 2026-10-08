@@ -21,7 +21,7 @@ public class LogoutSessionManager
 
     public void Add(string? sub, string? sid)
     {
-        _logger.LogInformation("BC Add logout session to cache. sub: '{sub}', sid: '{sid}'", sub, sid);
+        _logger.LogInformation("BC Add logout session to cache. sub: '{Sub}', sid: '{Sid}'", sub, sid);
 
         var options = new DistributedCacheEntryOptions()
             .SetSlidingExpiration(TimeSpan.FromDays(cacheExpirationInDays));
@@ -29,22 +29,23 @@ public class LogoutSessionManager
         var key = GetCacheKey(sub, sid);
         var logoutSession = _cache.GetString(key);
 
-        _logger.LogInformation("BC logoutSession: {logoutSession}", logoutSession);
 
         if (logoutSession != null)
         {
             var session = JsonSerializer.Deserialize<BackchannelLogoutSession>(logoutSession);
+            _logger.LogInformation("BC existing logoutSession: {LogoutSession}", logoutSession);
         }
         else
         {
             var newSession = new BackchannelLogoutSession { Sub = sub, Sid = sid };
             _cache.SetString(key, JsonSerializer.Serialize(newSession), options);
+            _logger.LogInformation("BC created new logoutSession: {Key}", key);
         }
     }
 
     public async Task<bool> IsLoggedOutAsync(string? sub, string? sid)
     {
-        _logger.LogInformation("BC IsLoggedOutAsync: sub: {sub}, sid: {sid}", sub, sid);
+        _logger.LogInformation("BC IsLoggedOutAsync: sub: {Sub}, sid: {Sid}", sub, sid);
         var key = GetCacheKey(sub, sid);
 
         var isLoggedOut = false;
@@ -57,7 +58,7 @@ public class LogoutSessionManager
                 isLoggedOut = session.IsMatch(sub, sid);
             }
 
-            _logger.LogInformation("BC Logout session exists T/F {matches} : {sub}, sid: {sid}", isLoggedOut, sub, sid);
+            _logger.LogInformation("BC Logout session exists T/F {IsLoggedOut} : {Sub}, sid: {Sid}", isLoggedOut, sub, sid);
         }
 
         return isLoggedOut;
@@ -65,7 +66,7 @@ public class LogoutSessionManager
 
     public async Task RemoveAsync(string? sub, string? sid)
     {
-        _logger.LogInformation("BC Remove logout session from cache. sub: '{sub}', sid: '{sid}'", sub, sid);
+        _logger.LogInformation("BC Remove logout session from cache. sub: '{Sub}', sid: '{Sid}'", sub, sid);
         var key = GetCacheKey(sub, sid);
         await _cache.RemoveAsync(key);
     }
