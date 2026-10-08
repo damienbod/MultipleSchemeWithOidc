@@ -47,20 +47,20 @@ public partial class LogoutSessionManager
         _logger.LogInformation("BC IsLoggedOutAsync: sub: {sub}, sid: {sid}", sub, sid);
         var key = GetCacheKey(sub, sid);
 
-        var matches = false;
+        var isLoggedOut = false;
         var logoutSession = await _cache.GetStringAsync(key);
         if (logoutSession != null)
         {
             var session = JsonSerializer.Deserialize<BackchannelLogoutSession>(logoutSession);
             if (session != null)
             {
-                matches = session.IsMatch(sub, sid);
+                isLoggedOut = session.IsMatch(sub, sid);
             }
 
-            _logger.LogInformation("BC Logout session exists T/F {matches} : {sub}, sid: {sid}", matches, sub, sid);
+            _logger.LogInformation("BC Logout session exists T/F {matches} : {sub}, sid: {sid}", isLoggedOut, sub, sid);
         }
 
-        return matches;
+        return isLoggedOut;
     }
 
     public async Task RemoveAsync(string? sub, string? sid)
