@@ -18,7 +18,7 @@ public class CookieEventHandler : CookieAuthenticationEvents
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.Principal!.Identity!.IsAuthenticated)
+        if (context.Principal?.Identity?.IsAuthenticated == true)
         {
             _logger.LogInformation("BC ValidatePrincipal: {PrincipalIdentityIsAuthenticated}", context.Principal.Identity.IsAuthenticated);
             var sub = context.Principal.FindFirst("sub")?.Value;
@@ -30,6 +30,8 @@ public class CookieEventHandler : CookieAuthenticationEvents
 
                 await context.HttpContext.SignOutAsync("SchemeOne");
                 await context.HttpContext.SignOutAsync("SchemeTwo");
+
+                //await _logoutSessionManager.RemoveAsync(sub, sid);
             }
         }
     }
