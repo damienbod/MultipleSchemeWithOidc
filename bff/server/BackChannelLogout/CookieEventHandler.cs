@@ -8,10 +8,10 @@ public class CookieEventHandler : CookieAuthenticationEvents
     private readonly LogoutSessionManager _logoutSessionManager;
     private readonly ILogger<CookieEventHandler> _logger;
 
-    public CookieEventHandler(LogoutSessionManager logoutSessions, ILoggerFactory loggerFactory)
+    public CookieEventHandler(LogoutSessionManager logoutSessions, ILogger<CookieEventHandler> logger)
     {
         _logoutSessionManager = logoutSessions;
-        _logger = loggerFactory.CreateLogger<CookieEventHandler>();
+        _logger = logger;
     }
 
     public override async Task ValidatePrincipal(CookieValidatePrincipalContext context)
