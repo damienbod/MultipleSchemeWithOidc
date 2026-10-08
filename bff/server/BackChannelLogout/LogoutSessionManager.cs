@@ -39,7 +39,7 @@ public partial class LogoutSessionManager
         {
             var newSession = new BackchannelLogoutSession { Sub = sub, Sid = sid };
             _cache.SetString(key, JsonSerializer.Serialize(newSession), options);
-        }     
+        }
     }
 
     public async Task<bool> IsLoggedOutAsync(string? sub, string? sid)
@@ -72,6 +72,6 @@ public partial class LogoutSessionManager
 
     private static string GetCacheKey(string? sub, string? sid)
     {
-        return sub + sid;
+        return $"{sub}{sid}";
     }
 }
