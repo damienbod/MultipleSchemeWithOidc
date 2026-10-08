@@ -46,7 +46,7 @@ public class BackchannelLogoutController : ControllerBase
 
         try
         {
-            var user = await ValidateLogoutToken(logout_token);
+            var user = await ValidateLogoutTokenAsync(logout_token);
 
             // these are the sub & sid to signout
             var sub = user.FindFirst("sub")?.Value;
@@ -63,7 +63,7 @@ public class BackchannelLogoutController : ControllerBase
         return BadRequest();
     }
 
-    private async Task<ClaimsPrincipal> ValidateLogoutToken(string logoutToken)
+    private async Task<ClaimsPrincipal> ValidateLogoutTokenAsync(string logoutToken)
     {
         var claims = await ValidateJwt(logoutToken);
 
