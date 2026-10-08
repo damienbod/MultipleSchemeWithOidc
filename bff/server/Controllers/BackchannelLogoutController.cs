@@ -75,7 +75,7 @@ public class BackchannelLogoutController : ControllerBase
         var nonce = claims.FindFirstValue("nonce");
         if (!string.IsNullOrWhiteSpace(nonce))
         {
-            throw new Exception("BC Invalid logout token, no nonce");
+            throw new Exception("BC Invalid logout token, nonce is present");
         }
 
         var eventsJson = claims.FindFirst("events")?.Value;
