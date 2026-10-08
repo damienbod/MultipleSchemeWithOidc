@@ -72,6 +72,7 @@ public class BackchannelLogoutController : ControllerBase
             throw new Exception("BC Invalid logout token sub or sid is missing");
         }
 
+        // If a nonce is required, it doesn't work with Keycloak
         var nonce = claims.FindFirstValue("nonce");
         if (!string.IsNullOrWhiteSpace(nonce))
         {
