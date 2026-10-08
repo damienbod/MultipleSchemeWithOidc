@@ -65,7 +65,7 @@ public class BackchannelLogoutController : ControllerBase
 
     private async Task<ClaimsPrincipal> ValidateLogoutTokenAsync(string logoutToken)
     {
-        var claims = await ValidateJwt(logoutToken);
+        var claims = await ValidateJwtAsync(logoutToken);
 
         if (claims.FindFirst("sub") == null && claims.FindFirst("sid") == null)
         {
@@ -97,7 +97,7 @@ public class BackchannelLogoutController : ControllerBase
         return claims;
     }
 
-    private async Task<ClaimsPrincipal> ValidateJwt(string jwt)
+    private async Task<ClaimsPrincipal> ValidateJwtAsync(string jwt)
     {
         var disco = await HttpClientDiscoveryExtensions.GetDiscoveryDocumentAsync(
            _httpClient, _configuration["WebOidcAuthority"]);
