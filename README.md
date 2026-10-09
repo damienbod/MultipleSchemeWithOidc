@@ -54,6 +54,9 @@ builder.Services.AddAuthentication(options =>
 }
 ```
 
+## History
+- 2026-10-09 Initial version of the project.
+
 ## Links
 
 https://learn.microsoft.com/en-us/aspnet/core/security/authorization/authorize-with-a-specific-scheme
